@@ -13,8 +13,8 @@ const target = new Robot(2.0 * Math.PI);
 // Controls
 const scheduler = new Scheduler(dt);
 scheduler.addTask(new RobotController(alex, () => target.state, tractor,
-    new PID(kp, 0.03 * kp, 0.0, maxR),
-    new PID(30.0 * kp, 0.0, 0.0, 0.0)));
+    new PID(kp, 0.1 * kp, 0.0, maxR),
+    new PID(50.0 * kp, 0.0, 0.0, 0.0)));
 scheduler.addTask(new Simulator(alex, dt * 0.001));
 scheduler.addTask(new Simulator(target, dt * 0.001));
 scheduler.addTask(new TargetCtrl(alex, target, 0.5 * height - 100.0));
