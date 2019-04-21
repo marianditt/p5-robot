@@ -1,17 +1,24 @@
 class View {
-  constructor() {
+
+  /**
+   * Create a new view that manages the rendering of drawables.
+   *
+   * @param width the canvas width
+   * @param height the canvas height
+   */
+  constructor(width, height) {
     this.ui = {
       margin: 10
     };
 
     this.bounds = {
-      xmin: -300,
-      xmax: 300,
-      ymin: -200,
-      ymax: 200
+      xmin: -0.5 * width,
+      xmax: 0.5 * width,
+      ymin: -0.5 * height,
+      ymax: 0.5 * height
     };
 
-    this.drawables = [];
+    this._drawables = [];
   }
 
   /**
@@ -24,7 +31,7 @@ class View {
    * @param drawable the object to be drawn
    */
   addDrawable(drawable) {
-    this.drawables.push(drawable);
+    this._drawables.push(drawable);
   }
 
   setup(p5) {
@@ -39,6 +46,6 @@ class View {
 
     p5.background(222);
 
-    this.drawables.forEach(drawable => drawable.draw(p5));
+    this._drawables.forEach(drawable => drawable.draw(p5));
   }
 }

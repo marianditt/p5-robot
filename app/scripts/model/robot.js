@@ -1,5 +1,11 @@
 class Robot {
-  constructor() {
+
+  /**
+   * Creates a new robot model.
+   *
+   * @param maxOmega the maximum control input of a wheel
+   */
+  constructor(maxOmega) {
     this.state = {
       x: 0.0,
       y: 0.0,
@@ -18,11 +24,10 @@ class Robot {
     };
 
     this._ctrl = {
-      max: 2.0 * Math.PI,
+      max: maxOmega,
       omegaLeft: 0.0,
       omegaRight: 0.0
     };
-
   }
 
   /**
@@ -94,18 +99,5 @@ class Robot {
       omegaLeft: (v - 0.5 * w * omega) * invR,
       omegaRight: (v + 0.5 * w * omega) * invR
     };
-  }
-
-  /**
-   * Moves the robot state by an offset.
-   *
-   * @param dx the offset in x-direction
-   * @param dy the offset in y-direction
-   * @param dphi the orientation offset
-   */
-  move(dx, dy, dphi) {
-    this.state.x += dx;
-    this.state.y += dy;
-    this.state.phi += dphi;
   }
 }

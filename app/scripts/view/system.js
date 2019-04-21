@@ -1,21 +1,21 @@
 class System {
 
   /**
-   * Constructs a new coordinate system view.
+   * Creates a new coordinate system view.
    *
    * @param ui provides a margin size
    * @param bounds provides min and max values in x- and y-direction
    */
   constructor(ui, bounds) {
-    this.ui = ui;
-    this.bounds = bounds;
+    this._ui = ui;
+    this._bounds = bounds;
   }
 
   draw(p5) {
     System._drawZero(p5, 100);
 
-    const x = this.bounds.xmin + this.ui.margin;
-    const y = this.bounds.ymin + this.ui.margin;
+    const x = this._bounds.xmin + this._ui.margin;
+    const y = this._bounds.ymin + this._ui.margin;
     System._drawAxis(p5, x, y, 50);
   }
 

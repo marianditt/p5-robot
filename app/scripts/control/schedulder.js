@@ -1,13 +1,13 @@
 class Scheduler {
 
   /**
-   * Constructs a new scheduler that executes tasked periodically.
+   * Creates a new scheduler that executes tasked periodically.
    *
    * @param dt the delay between successive task executions in milliseconds
    */
   constructor(dt) {
-    this.dt = dt;
-    this.tasks = [];
+    this._dt = dt;
+    this._tasks = [];
   }
 
   /**
@@ -20,7 +20,7 @@ class Scheduler {
    * @param task the task to be executed periodically
    */
   addTask(task) {
-    this.tasks.push(task);
+    this._tasks.push(task);
   }
 
   /**
@@ -28,11 +28,11 @@ class Scheduler {
    */
   start() {
     const t0 = new Date().getTime();
-    this._run(t0, this.dt, 1);
+    this._run(t0, this._dt, 1);
   }
 
   _run(t0, dt, step) {
-    this.tasks.forEach(task => task.run(dt / 1000));
+    this._tasks.forEach(task => task.run());
 
     // Adjust timeout such that the delta time is preserved on average. The
     // scheduler will make up the time spent on breakpoints during debugging.
