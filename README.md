@@ -26,7 +26,7 @@ are not aware of rendering details or how they are manipulated. They just captur
 provide transformation methods.
 
 ## scripts/control
-The control package is used for classes that manipulate models. The control loop is independent from
+The control package is used for classes that manipulate models. The control loop is independent of
 the frame rate of _p5_. Control classes make an effort to be as unaware of model implementation
 details as possible.
 
