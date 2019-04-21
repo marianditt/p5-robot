@@ -47,8 +47,8 @@ class TargetCtrl {
    */
   _spawn() {
     this._target.state = {
-      x: 0.0,
-      y: 0.0,
+      x: TargetCtrl._random(this._radius),
+      y: TargetCtrl._random(this._radius),
       phi: TargetCtrl._random(Math.PI)
     };
   }
