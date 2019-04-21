@@ -1,6 +1,7 @@
 class TargetCtrl {
 
   static _INF = 1e6;
+  static _TIMEOUT = 1000;
 
   /**
    * Generator of targets
@@ -13,7 +14,7 @@ class TargetCtrl {
     this._robot = robot;
     this._target = target;
     this._radius = radius;
-    this._start = new Date().getTime();
+    this._start = TargetCtrl._TIMEOUT;
   }
 
   /**
@@ -48,7 +49,7 @@ class TargetCtrl {
     this._target.state = {
       x: 0.0,
       y: 0.0,
-      phi: TargetCtrl._rnd(-Math.PI, Math.PI)
+      phi: TargetCtrl._random(Math.PI)
     };
   }
 
@@ -69,12 +70,13 @@ class TargetCtrl {
 
   _steerRandomly() {
     const end = new Date().getTime();
-    if (end - this._start > 1000) { // Change heading after one second.
-      const rnd = TargetCtrl._rnd(0.0, 5.0);
-      if (rnd < 1.5) {
-        this._turnLeft();
-      } else if (rnd < 3.5) {
+    if (end - this._start > TargetCtrl._TIMEOUT) {
+      const pStraight = 0.4;
+      const random = TargetCtrl._random(1.0);
+      if (Math.abs(random) < pStraight) {
         this._steerStraight();
+      } else if (random < 0.0) {
+        this._turnLeft();
       } else {
         this._turnRight();
       }
@@ -121,7 +123,7 @@ class TargetCtrl {
     return d;
   }
 
-  static _rnd(min, max) {
-    return min + Math.random() * (max - min);
+  static _random(range) {
+    return range * (2.0 * Math.random() - 1.0);
   }
 }
